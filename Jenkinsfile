@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Start') {
       steps {
-        echo 'Lab_1: nginx/custom'
+        echo 'my_project/Lab_1: nginx/custom'
       }
     }
 
@@ -16,7 +16,7 @@ pipeline {
 
     stage('Test nginx/custom') {
       steps {
-        echo 'Pass'
+        echo 'Pass this step'
       }
     }
 
