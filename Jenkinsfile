@@ -1,43 +1,35 @@
 pipeline {
     agent any
+
     stages {
-        stage('Start') {
+        stage('Build') {
             steps {
-                echo 'Lab_2: started by GitHub'
-            }
-        }
-        stage('Image build') {
-            steps {
-                sh "docker build -t prikm:latest ."
-                
-                // Тегуємо образ різними версіями
-                sh "docker tag prikm nataia/prikm:latest"
-                sh "docker tag prikm nataia/prikm:$BUILD_NUMBER"
-                sh "docker tag prikm nataia/prikm:staging"
-            }
-        }
-        stage('Push to registry') {
-            steps {
-                withDockerRegistry([credentialsId: "dockerhub_token", url: ""]) {
-                    sh "docker push nataia/prikm:latest"
-                    sh "docker push nataia/prikm:$BUILD_NUMBER"
-                    sh "docker push nataia/prikm:staging"
-                }
-            }
-        }
-        stage('Deploy image') {
-            steps {
-                sh "docker run -d -p 80:80 nataia/prikm"
+                echo 'Building project...'
+                sh 'sleep 5'  
             }
         }
     }
+
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            script {
+                sendTelegramMessage("✅ Jenkins: Build успішно завершено!")
+            }
         }
         failure {
-            echo 'Pipeline failed, please check the logs.'
+            script {
+                sendTelegramMessage("❌ Jenkins: Build провалено!")
+            }
         }
     }
 }
+
+
+def sendTelegramMessage(String message) {
+    def botToken = "7395725902:AAH_z4OursKRB6qzKb1DOwKsSlDQcthh1dQ"
+    def chatId = "1046935503"
+    def encodedMessage = URLEncoder.encode(message, "UTF-8")
+    sh "curl -s -X POST https://api.telegram.org/bot${botToken}/sendMessage -d chat_id=${chatId} -d text=${encodedMessage}"
+}
+
 
