@@ -11,17 +11,17 @@ pipeline {
                 sh "docker build -t prikm:latest ."
                 
                 // Тегуємо образ різними версіями
-                sh "docker tag prikm твій_логін_dockerhub/prikm:latest"
-                sh "docker tag prikm твій_логін_dockerhub/prikm:$BUILD_NUMBER"
-                sh "docker tag prikm твій_логін_dockerhub/prikm:staging"
+                sh "docker tag prikm natalia/prikm:latest"
+                sh "docker tag prikm natalia/prikm:$BUILD_NUMBER"
+                sh "docker tag prikm natalia/prikm:staging"
             }
         }
         stage('Push to registry') {
             steps {
                 withDockerRegistry([credentialsId: "dockerhub_credentials", url: ""]) {
-                    sh "docker push твій_логін_dockerhub/prikm:latest"
-                    sh "docker push твій_логін_dockerhub/prikm:$BUILD_NUMBER"
-                    sh "docker push твій_логін_dockerhub/prikm:staging" 
+                    sh "docker push natalia/prikm:latest"
+                    sh "docker push natalia/prikm:$BUILD_NUMBER"
+                    sh "docker push natalia/prikm:staging"
                 }
             }
         }
@@ -37,7 +37,5 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed, please check the logs.'
-        }
-    }
-}
+    
 
