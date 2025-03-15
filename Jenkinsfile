@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Push to registry') {
             steps {
-                withDockerRegistry([credentialsId: "dockerhub_credentials", url: ""]) {
+                withDockerRegistry([credentialsId: "dockerhub_token", url: ""]) {
                     sh "docker push natalia/prikm:latest"
                     sh "docker push natalia/prikm:$BUILD_NUMBER"
                     sh "docker push natalia/prikm:staging"
