@@ -11,23 +11,23 @@ pipeline {
                 sh "docker build -t prikm:latest ."
                 
                 // Тегуємо образ різними версіями
-                sh "docker tag prikm natalia/prikm:latest"
-                sh "docker tag prikm natalia/prikm:$BUILD_NUMBER"
-                sh "docker tag prikm natalia/prikm:staging"
+                sh "docker tag prikm nataia/prikm:latest"
+                sh "docker tag prikm nataia/prikm:$BUILD_NUMBER"
+                sh "docker tag prikm nataia/prikm:staging"
             }
         }
         stage('Push to registry') {
             steps {
                 withDockerRegistry([credentialsId: "dockerhub_token", url: ""]) {
-                    sh "docker push natalia/prikm:latest"
-                    sh "docker push natalia/prikm:$BUILD_NUMBER"
-                    sh "docker push natalia/prikm:staging"
+                    sh "docker push nataia/prikm:latest"
+                    sh "docker push nataia/prikm:$BUILD_NUMBER"
+                    sh "docker push nataia/prikm:staging"
                 }
             }
         }
         stage('Deploy image') {
             steps {
-                sh "docker run -d -p 80:80 natalia/prikm"
+                sh "docker run -d -p 80:80 nataia/prikm"
             }
         }
     }
