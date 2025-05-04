@@ -1,0 +1,17 @@
+{
+	"ulid": "01JTCY3ZZCDWHHG2SKMM41STFM",
+	"minTime": 1746303406858,
+	"maxTime": 1746309600000,
+	"stats": {
+		"numSamples": 232556,
+		"numSeries": 1237,
+		"numChunks": 2474
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01JTCY3ZZCDWHHG2SKMM41STFM"
+		]
+	},
+	"version": 1
+}
