@@ -1,0 +1,8 @@
+cvs
+docker-plugin
+git
+prometheus:latest
+workflow-job
+workflow-cps
+gitlab-plugin
+
