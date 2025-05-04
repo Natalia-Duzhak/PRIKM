@@ -1,30 +1,13 @@
 pipeline {
-  agent any
-
-  stages {
-    stage('Start') {
-      steps {
-        echo 'my_project/Lab_1: nginx/custom'
-      }
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo 'Hello, Jenkins!'
+            }
+        }
     }
-
-    stage('Build nginx/custom') {
-      steps {
-        sh 'docker build -t nginx/custom:latest .'
-      }
-    }
-
-    stage('Test nginx/custom') {
-      steps {
-        echo 'Pass this step'
-      }
-    }
-
-    stage('Deploy nginx/custom') {
-      steps {
-        sh "docker run -d -p 80:80 nginx/custom:latest"
-      }
-    }
-  }
 }
+
+
 
